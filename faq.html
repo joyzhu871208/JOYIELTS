@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ & AI Assistant - IELTS Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .card {
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #ffd368;
+            color: #1a1a1a;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #e6be5e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .category-tab {
+            transition: all 0.3s ease;
+        }
+        .category-tab.active {
+            background-color: #ffd368;
+            color: #1a1a1a;
+        }
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover {
+            background-color: #f8f9fa;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-answer.active {
+            max-height: 1000px;
+        }
+        .ai-assistant {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .ai-chat-window {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+        .ai-chat-window.active {
+            display: flex;
+        }
+        .ai-chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+        .ai-chat-input {
+            padding: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .ai-message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        .ai-message.user {
+            background-color: #f0f0f0;
+            margin-left: auto;
+        }
+        .ai-message.assistant {
+            background-color: #ffd368;
+            margin-right: auto;
+        }
+        .ai-toggle-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #ffd368;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .ai-toggle-btn:hover {
+            transform: scale(1.05);
+        }
+        .ai-toggle-btn i {
+            font-size: 24px;
+            color: #1a1a1a;
+        }
+        .search-container {
+            position: relative;
+        }
+        .search-container input {
+            padding-right: 40px;
+        }
+        .search-container i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+        @media (max-width: 768px) {
+            .ai-chat-window {
+                width: 100%;
+                height: 70vh;
+                bottom: 0;
+                right: 0;
+                border-radius: 10px 10px 0 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="flex justify-between items-center p-6 shadow-md sticky top-0 bg-white z-50">
+        <h1 class="text-2xl font-bold">JOY IELTS</h1>
+        <ul class="hidden md:flex space-x-6 text-sm font-medium">
+            <li><a href="index.html" class="hover:text-yellow-500">Home</a></li>
+            <li><a href="about.html" class="hover:text-yellow-500">About</a></li>
+            <li><a href="resources.html" class="hover:text-yellow-500">Free Resources</a></li>
+            <li><a href="templates.html" class="hover:text-yellow-500">Templates & Courses</a></li>
+            <li><a href="faq.html" class="text-yellow-500">FAQ / Assistant</a></li>
+            <li><a href="contact.html" class="hover:text-yellow-500">Contact</a></li>
+        </ul>
+        <div class="md:hidden">
+            <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-500" aria-controls="mobile-menu" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="sm:hidden" id="mobile-menu">
+        <div class="pt-2 pb-3 space-y-1">
+            <a href="index.html" class="bg-transparent border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
+            <a href="about.html" class="bg-transparent border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About</a>
+            <a href="resources.html" class="bg-transparent border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Free Resources</a>
+            <a href="templates.html" class="bg-transparent border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Templates & Courses</a>
+            <a href="faq.html" class="bg-yellow-50 border-yellow-500 text-yellow-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">FAQ / Assistant</a>
+            <a href="contact.html" class="bg-transparent border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                    <span class="block">FAQ & AI Assistant</span>
+                </h1>
+                <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+                    Find answers to common questions and get instant help from our AI assistant.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Section -->
+    <div class="bg-gray-50 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-xl mx-auto">
+                <div class="search-container">
+                    <input type="text" id="faq-search" placeholder="Search for questions..." class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Categories -->
+    <div class="bg-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button class="category-tab active px-4 py-2 rounded-full text-sm font-medium" data-category="all">All Questions</button>
+                <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="courses">Courses</button>
+                <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="templates">Templates</button>
+                <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="payment">Payment & Access</button>
+                <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="learning">Learning Tips</button>
+                <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="technical">Technical Issues</button>
+            </div>
+
+            <!-- FAQ Items -->
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- Courses Category -->
+                <div class="faq-item bg-white rounded-lg shadow-sm border border-gray-200 p-4" data-category="courses">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(this)">
+                        <h3 class="text-lg font-medium text-gray-900">What types of courses do you offer?</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="faq-answer mt-2 text-gray-600">
+                        <p>We offer a variety of IELTS preparation courses including:</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>Writing Mastery Course</li>
+                            <li>Reading Strategies Course</li>
+                            <li>Listening Practice Course</li>
+                            <li>Speaking Confidence Course</li>
+                            <li>Complete IELTS Preparation Course</li>
+                        </ul>
+                        <p class="mt-2">Each course is designed to target specific skills and includes comprehensive materials, practice exercises, and feedback.</p>
+                        <p class="mt-2">We also offer a free vocabulary trial lesson to help you experience our teaching style before committing to a full course.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white rounded-lg shadow-sm border border-gray-200 p-4" data-category="courses">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(this)">
+                        <h3 class="text-lg font-medium text-gray-900">How long do I have access to the courses?</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="faq-answer mt-2 text-gray-600">
+                        <p>Once you purchase a course, you have lifetime access to all the materials. You can study at your own pace and revisit the content as many times as you need.</p>
+                        <p class="mt-2">We also regularly update our courses with new content and improvements, which you'll receive at no additional cost.</p>
+                    </div>
+                </div>
+
+                <!-- Templates Category -->
+                <div class="faq-item bg-white rounded-lg shadow-sm border border-gray-200 p-4" data-category="templates">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(this)">
+                        <h3 class="text-lg font-medium text-gray-900">What are Notion templates and how do they help with IELTS preparation?</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="faq-answer mt-2 text-gray-600">
+                        <p>Notion templates are pre-designed digital frameworks that help you organize your IELTS preparation effectively. Our templates include:</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>Study planners to track your progress</li>
+                            <li>Vocabulary databases to build your word bank</li>
+                            <li>Writing frameworks for different essay types</li>
+                            <li>Reading strategies templates</li>
+                            <li>Speaking practice logs</li>
+                        </ul>
+                        <p class="mt-2">These templates save you time on setup and provide proven structures for effective IELTS preparation.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white rounded-lg shadow-sm border border-gray-200 p-4" data-category="templates">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(this)">
+                        <h3 class="text-lg font-medium text-gray-900">Do I need to have Notion installed to use the templates?</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="faq-answer mt-2 text-gray-600">
+                        <p>Yes, you need a Notion account to use our templates. Notion is free to use and available on web browsers, desktop apps (Windows/Mac), and mobile apps (iOS/Android).</p>
+                        <p class="mt-2">After purchase, you'll receive a link to duplicate the template to your Notion workspace. No technical expertise is required - just click the link and the template will be added to your account.</p>
+                    </div>
+                </div>
+
+                <!-- Payment Category -->
+                <div class="faq-item bg-white rounded-lg shadow-sm border border-gray-200 p-4" data-category="payment">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(this)">
+                        <h3 class="text-lg font-medium text-gray-900">What payment methods do you accept?</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="faq-answer mt-2 text-gray-600">
+                        <p>We accept various payment methods to accommodate our international students:</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>International: Credit/Debit cards, PayPal, Buy Me a Coffee</li>
+                            <li>China: WeChat Pay, Alipay</li>
+                        </ul>
+                        <p class="mt-2">All payments are processed securely through our trusted payment partners.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white rounded-lg shadow-sm border border-gray-200 p-4" data-category="payment">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(this)">
+                        <h3 class="text-lg font-medium text-gray-900">What is your purchase policy?</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="faq-answer mt-2 text-gray-600">
+                        <p>We encourage you to carefully consider your purchase before making a decision. All sales are final, and we do not offer refunds once a course or template has been purchased.</p>
+                        <p class="mt-2">To help you make an informed decision, we offer:</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>Detailed course descriptions and previews</li>
+                            <li>A free vocabulary trial lesson</li>
+                            <li>Sample templates and resources</li>
+                            <li>Customer testimonials and reviews</li>
+                        </ul>
+                        <p class="mt-2">If you have any questions before purchasing, please contact our support team or use our AI Assistant for guidance.</p>
+                    </div>
+                </div>
+
+                <!-- Learning Tips Category -->
+                <div class="faq-item bg-white rounded-lg shadow-sm border border-gray-200 p-4" data-category="learning">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(this)">
+                        <h3 class="text-lg font-medium text-gray-900">How long does it typically take to prepare for IELTS?</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="faq-answer mt-2 text-gray-600">
+                        <p>The preparation time varies depending on your current English level and target score:</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>For a 0.5-1.0 band increase: 1-2 months of consistent study</li>
+                            <li>For a 1.0-1.5 band increase: 2-3 months of consistent study</li>
+                            <li>For a 1.5-2.0 band increase: 3-6 months of consistent study</li>
+                        </ul>
+                        <p class="mt-2">We recommend studying for at least 2-3 hours per day for optimal results. Our courses and templates are designed to maximize your study efficiency.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white rounded-lg shadow-sm border border-gray-200 p-4" data-category="learning">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(this)">
+                        <h3 class="text-lg font-medium text-gray-900">What's the best way to improve my IELTS writing score?</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="faq-answer mt-2 text-gray-600">
+                        <p>To improve your IELTS writing score, we recommend:</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>Understanding the assessment criteria (Task Achievement, Coherence, Lexical Resource, Grammatical Range)</li>
+                            <li>Practicing with timed conditions to improve speed</li>
+                            <li>Learning high-level vocabulary and phrases</li>
+                            <li>Studying model answers and understanding what makes them effective</li>
+                            <li>Getting feedback on your writing from experienced teachers</li>
+                        </ul>
+                        <p class="mt-2">Our Writing Mastery Course and Writing Templates provide structured guidance for all these aspects.</p>
+                    </div>
+                </div>
+
+                <!-- Technical Issues Category -->
+                <div class="faq-item bg-white rounded-lg shadow-sm border border-gray-200 p-4" data-category="technical">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(this)">
+                        <h3 class="text-lg font-medium text-gray-900">I can't access my purchased course/template. What should I do?</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="faq-answer mt-2 text-gray-600">
+                        <p>If you're having trouble accessing your purchase, please try these steps:</p>
+                        <ol class="list-decimal pl-5 mt-2 space-y-1">
+                            <li>Check your email (including spam folder) for the access instructions</li>
+                            <li>Make sure you're using the same email address you used for purchase</li>
+                            <li>Clear your browser cache and cookies</li>
+                            <li>Try accessing from a different browser or device</li>
+                        </ol>
+                        <p class="mt-2">If you're still having issues, please contact our support team with your order details, and we'll help you resolve the problem.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white rounded-lg shadow-sm border border-gray-200 p-4" data-category="technical">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleFaq(this)">
+                        <h3 class="text-lg font-medium text-gray-900">How do I get technical support for the courses or templates?</h3>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </div>
+                    <div class="faq-answer mt-2 text-gray-600">
+                        <p>We offer several ways to get technical support:</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>Email our support team at support@ieltslearning.com</li>
+                            <li>Use our AI Assistant (available on this page) for quick answers</li>
+                            <li>Check our Help Center for detailed guides and tutorials</li>
+                            <li>Join our community forum to ask questions and get help from other students</li>
+                        </ul>
+                        <p class="mt-2">Our support team typically responds within 24 hours during business days.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Still Have Questions Section -->
+    <div class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Still Have Questions?
+                </h2>
+                <p class="mt-4 text-lg text-gray-500">
+                    Our AI Assistant is here to help you 24/7. Click the chat icon in the bottom right corner to get instant answers to your questions.
+                </p>
+                <div class="mt-8">
+                    <a href="contact.html" class="btn-primary inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm">
+                        Contact Us
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Assistant -->
+    <div class="ai-assistant">
+        <div class="ai-toggle-btn" id="ai-toggle">
+            <i class="fas fa-comments"></i>
+        </div>
+    </div>
+
+    <!-- AI Chat Window -->
+    <div class="ai-chat-window" id="ai-chat-window">
+        <div class="bg-yellow-500 p-4 rounded-t-lg flex justify-between items-center">
+            <h3 class="font-bold text-gray-900">IELTS Learning Assistant</h3>
+            <button id="ai-close" class="text-gray-900">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="ai-chat-messages" id="ai-chat-messages">
+            <div class="ai-message assistant">
+                <p>Hello! I'm your IELTS Learning Assistant. How can I help you today?</p>
+            </div>
+        </div>
+        <div class="ai-chat-input">
+            <div class="flex">
+                <input type="text" id="ai-user-input" placeholder="Type your question here..." class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
+                <button id="ai-send" class="bg-yellow-500 text-gray-900 px-4 py-2 rounded-r-lg hover:bg-yellow-600 transition-colors">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="mt-8 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between">
+                <div class="flex space-x-6 md:order-2">
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">Facebook</span>
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">Instagram</span>
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">Twitter</span>
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">YouTube</span>
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                <p class="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
+                    &copy; 2023 IELTS Learning. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // FAQ toggle
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            answer.classList.toggle('active');
+            
+            if (answer.classList.contains('active')) {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+
+        // Category filtering
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                
+                // Show/hide FAQ items based on category
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (category === 'all' || item.getAttribute('data-category') === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Search functionality
+        document.getElementById('faq-search').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const question = item.querySelector('h3').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // AI Assistant toggle
+        document.getElementById('ai-toggle').addEventListener('click', function() {
+            document.getElementById('ai-chat-window').classList.add('active');
+        });
+
+        document.getElementById('ai-close').addEventListener('click', function() {
+            document.getElementById('ai-chat-window').classList.remove('active');
+        });
+
+        // AI Assistant chat functionality
+        document.getElementById('ai-send').addEventListener('click', sendMessage);
+        document.getElementById('ai-user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const input = document.getElementById('ai-user-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                // Add user message to chat
+                addMessage(message, 'user');
+                
+                // Clear input
+                input.value = '';
+                
+                // Simulate AI response (replace with actual API call)
+                setTimeout(() => {
+                    const response = getAIResponse(message);
+                    addMessage(response, 'assistant');
+                }, 1000);
+            }
+        }
+
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('ai-chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('ai-message', sender);
+            
+            const paragraph = document.createElement('p');
+            paragraph.textContent = text;
+            
+            messageDiv.appendChild(paragraph);
+            messagesContainer.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function getAIResponse(message) {
+            // Simple response logic (replace with actual API integration)
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('course') || lowerMessage.includes('class')) {
+                return "We offer various IELTS preparation courses including Writing Mastery, Reading Strategies, Listening Practice, and Speaking Confidence. Each course includes comprehensive materials and practice exercises. We also offer a free vocabulary trial lesson to help you experience our teaching style.";
+            } else if (lowerMessage.includes('template') || lowerMessage.includes('notion')) {
+                return "Our Notion templates help you organize your IELTS preparation effectively. They include study planners, vocabulary databases, writing frameworks, and more. You'll need a Notion account to use them.";
+            } else if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('payment')) {
+                return "Our courses and templates are priced competitively. We accept various payment methods including credit cards, PayPal, WeChat Pay, and Alipay. Check our Templates & Courses page for current pricing.";
+            } else if (lowerMessage.includes('refund') || lowerMessage.includes('money back')) {
+                return "We do not offer refunds for our courses and templates. We encourage you to carefully consider your purchase before making a decision. To help you make an informed choice, we offer detailed course descriptions, a free vocabulary trial lesson, and sample resources.";
+            } else if (lowerMessage.includes('time') || lowerMessage.includes('duration') || lowerMessage.includes('long')) {
+                return "The preparation time varies depending on your current English level and target score. Generally, it takes 1-6 months of consistent study to improve by 0.5-2.0 bands.";
+            } else if (lowerMessage.includes('writing') || lowerMessage.includes('essay')) {
+                return "To improve your IELTS writing score, focus on understanding the assessment criteria, practice with timed conditions, learn high-level vocabulary, study model answers, and get feedback from experienced teachers.";
+            } else if (lowerMessage.includes('reading') || lowerMessage.includes('comprehension')) {
+                return "For IELTS reading, practice skimming and scanning techniques, learn to identify key information, improve your vocabulary, and practice with various text types. Our Reading Strategies course can help you develop these skills.";
+            } else if (lowerMessage.includes('listening')) {
+                return "To improve your IELTS listening score, practice with various accents, learn to predict information, focus on key words, and practice note-taking. Our Listening Practice course provides structured guidance for these skills.";
+            } else if (lowerMessage.includes('speaking') || lowerMessage.includes('pronunciation')) {
+                return "For IELTS speaking, practice regularly with a partner or tutor, record yourself speaking, work on pronunciation and intonation, and expand your vocabulary. Our Speaking Confidence course can help you develop these skills.";
+            } else if (lowerMessage.includes('help') || lowerMessage.includes('support')) {
+                return "I'm here to help! You can also contact our support team at support@ieltslearning.com, check our Help Center, or join our community forum for more assistance.";
+            } else {
+                return "I'm not sure I understand your question. Could you please rephrase it or ask about our courses, templates, pricing, or specific IELTS skills (writing, reading, listening, speaking)?";
+            }
+        }
+    </script>
+</body>
+</html> 

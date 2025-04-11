@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Card Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .resource-card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            width: 20rem;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .resource-card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .resource-image {
+            border-radius: 0.75rem;
+            width: 100%;
+            height: 11rem;
+            object-fit: cover;
+        }
+        
+        .download-btn {
+            background-color: #ffd368;
+            color: black;
+            padding: 0.25rem 1rem;
+            border-radius: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .download-btn:hover {
+            filter: brightness(0.95);
+        }
+        
+        .video-link {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.875rem;
+            color: #2563eb;
+        }
+        
+        .video-link:hover {
+            text-decoration: underline;
+        }
+        
+        .play-icon {
+            width: 1rem;
+            height: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <h1 class="text-3xl font-bold mb-8 text-center">Resource Card Demo</h1>
+    
+    <div class="flex flex-wrap gap-8 justify-center">
+        <!-- Resource Card 1 -->
+        <div class="resource-card">
+            <img
+                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                alt="IELTS Writing Guide"
+                class="resource-image"
+            />
+            <h3 class="text-lg font-semibold">IELTS Writing Guide</h3>
+            <p class="text-sm text-gray-600">Comprehensive guide to improve your IELTS writing skills with examples and tips.</p>
+            <div class="flex gap-3 mt-2">
+                <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="download-btn"
+                >
+                    Download
+                </a>
+                <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="video-link"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="play-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                    </svg>
+                    Watch Guide
+                </a>
+            </div>
+        </div>
+        
+        <!-- Resource Card 2 -->
+        <div class="resource-card">
+            <img
+                src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                alt="IELTS Reading Strategies"
+                class="resource-image"
+            />
+            <h3 class="text-lg font-semibold">IELTS Reading Strategies</h3>
+            <p class="text-sm text-gray-600">Learn effective strategies to tackle the IELTS reading section with confidence.</p>
+            <div class="flex gap-3 mt-2">
+                <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="download-btn"
+                >
+                    Download
+                </a>
+                <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="video-link"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="play-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                    </svg>
+                    Watch Guide
+                </a>
+            </div>
+        </div>
+        
+        <!-- Resource Card 3 (No Video Link) -->
+        <div class="resource-card">
+            <img
+                src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                alt="IELTS Vocabulary List"
+                class="resource-image"
+            />
+            <h3 class="text-lg font-semibold">IELTS Vocabulary List</h3>
+            <p class="text-sm text-gray-600">Essential vocabulary for IELTS success, organized by topic and difficulty level.</p>
+            <div class="flex gap-3 mt-2">
+                <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="download-btn"
+                >
+                    Download
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-12 p-6 bg-white rounded-lg shadow-md max-w-3xl mx-auto">
+        <h2 class="text-xl font-bold mb-4">Component Details</h2>
+        <p class="mb-4">This is a demo of the <code>ResourceCard</code> React component. The component displays a resource card with:</p>
+        <ul class="list-disc pl-5 mb-4">
+            <li>Title</li>
+            <li>Description</li>
+            <li>Image</li>
+            <li>Download button</li>
+            <li>Optional video guide link</li>
+        </ul>
+        <p class="mb-4">The component features:</p>
+        <ul class="list-disc pl-5 mb-4">
+            <li>Hover effects (shadow and scale)</li>
+            <li>Responsive design</li>
+            <li>Consistent styling with the website theme</li>
+        </ul>
+        <p>To use this component in a React project, you would need to install Node.js and npm, then create a React application.</p>
+    </div>
+</body>
+</html> 
