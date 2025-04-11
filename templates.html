@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Templates & Courses - IELTS Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    /* Card style */
+    .card {
+      background-color: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Button style */
+    .btn-primary {
+      display: inline-block;
+      background-color: #ffd368; /* 哑光质感的黄色 */
+      color: #333; /* 深色文字，提高可读性 */
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-primary:hover {
+      background-color: #ffc833;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Category tabs */
+    .category-tab {
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .category-tab.active {
+      background-color: #ffd368; /* 统一为哑光质感的黄色 */
+      color: #333; /* 深色文字，提高可读性 */
+    }
+    
+    .category-tab:hover:not(.active) {
+      background-color: #f3f4f6;
+    }
+    
+    /* Product card */
+    .product-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .product-card .card-content {
+      flex-grow: 1;
+    }
+    
+    .product-image {
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    /* Testimonial carousel */
+    .testimonial {
+      padding: 1.5rem;
+      background-color: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Stats section */
+    .stat-card {
+      text-align: center;
+      padding: 1.5rem;
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffd368; /* 统一为哑光质感的黄色 */
+    }
+
+    .testimonial-card {
+      border-left: 4px solid #ffd368;
+    }
+
+    .product-section {
+      display: none;
+    }
+
+    .product-section.active {
+      display: block;
+    }
+
+    .nav-tab {
+      transition: all 0.3s ease;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-tab.active {
+      border-bottom: 2px solid #ffd368;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .nav-tab:hover:not(.active) {
+      color: #666;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Navigation Bar -->
+  <nav class="flex justify-between items-center p-6 shadow-md sticky top-0 bg-white z-50">
+    <h1 class="text-2xl font-bold">JOY IELTS</h1>
+    <ul class="hidden md:flex space-x-6 text-sm font-medium">
+      <li><a href="index.html" class="hover:text-yellow-500">Home</a></li>
+      <li><a href="about.html" class="hover:text-yellow-500">About</a></li>
+      <li><a href="resources.html" class="hover:text-yellow-500">Free Resources</a></li>
+      <li><a href="templates.html" class="text-yellow-500">Templates & Courses</a></li>
+      <li><a href="faq.html" class="hover:text-yellow-500">FAQ / Assistant</a></li>
+      <li><a href="contact.html" class="hover:text-yellow-500">Contact</a></li>
+    </ul>
+    <div class="md:hidden">
+      <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-500" aria-controls="mobile-menu" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="sm:hidden" id="mobile-menu">
+    <div class="pt-2 pb-3 space-y-1">
+      <a href="index.html" class="bg-transparent border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
+      <a href="about.html" class="bg-transparent border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About</a>
+      <a href="resources.html" class="bg-transparent border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Free Resources</a>
+      <a href="templates.html" class="bg-yellow-50 border-yellow-500 text-yellow-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Templates & Courses</a>
+      <a href="faq.html" class="bg-transparent border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">FAQ / Assistant</a>
+      <a href="contact.html" class="bg-transparent border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact</a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <div class="bg-white">
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+          <span class="block">Templates & Courses</span>
+        </h1>
+        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+          Premium IELTS learning materials to help you achieve your target score.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Type Navigation -->
+  <div class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-center space-x-8">
+        <button id="courses-tab" class="nav-tab active py-4 px-1 text-lg font-medium">
+          Courses
+        </button>
+        <button id="templates-tab" class="nav-tab py-4 px-1 text-lg font-medium">
+          Notion Templates
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Courses Section -->
+  <div id="courses-section" class="product-section active">
+    <!-- Category Tabs for Courses -->
+    <div class="bg-white py-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap justify-center gap-2">
+          <button class="category-tab active px-4 py-2 rounded-full text-sm font-medium" data-category="all-courses">
+            All Courses
+          </button>
+          <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="writing-courses">
+            Writing
+          </button>
+          <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="reading-courses">
+            Reading
+          </button>
+          <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="listening-courses">
+            Listening
+          </button>
+          <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="speaking-courses">
+            Speaking
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Courses -->
+    <div class="bg-gray-50 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-extrabold text-gray-900">Featured Courses</h2>
+          <p class="mt-4 text-lg text-gray-500">Our most popular IELTS preparation courses</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Course 1 -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm writing-courses">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="IELTS Writing Mastery Course" class="w-full product-image">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">IELTS Writing Mastery Course</h3>
+              <p class="text-gray-600 mb-4">Master both Task 1 and Task 2 with proven strategies and templates.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-gray-900">$49.99</span>
+                <a href="product-detail.html?id=writing-mastery" class="btn-primary px-4 py-2 rounded-md text-sm font-medium">View Details</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Course 2 -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm reading-courses">
+            <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="IELTS Reading Strategies" class="w-full product-image">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">IELTS Reading Strategies</h3>
+              <p class="text-gray-600 mb-4">Learn time-saving techniques to tackle any reading passage effectively.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-gray-900">$39.99</span>
+                <a href="product-detail.html?id=reading-strategies" class="btn-primary px-4 py-2 rounded-md text-sm font-medium">View Details</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Course 3 -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm comprehensive-courses">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="IELTS Complete Preparation" class="w-full product-image">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">IELTS Complete Preparation</h3>
+              <p class="text-gray-600 mb-4">Comprehensive course covering all four skills with practice tests.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-gray-900">$79.99</span>
+                <a href="product-detail.html?id=complete-preparation" class="btn-primary px-4 py-2 rounded-md text-sm font-medium">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- All Courses -->
+    <div class="bg-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-extrabold text-gray-900">All Courses</h2>
+          <p class="mt-4 text-lg text-gray-500">Browse our complete collection of IELTS courses</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Course 4 -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm listening-courses">
+            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="IELTS Listening Practice" class="w-full product-image">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">IELTS Listening Practice</h3>
+              <p class="text-gray-600 mb-4">Improve your listening skills with targeted practice exercises.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-gray-900">$34.99</span>
+                <a href="product-detail.html?id=listening-practice" class="btn-primary px-4 py-2 rounded-md text-sm font-medium">View Details</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Course 5 -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm speaking-courses">
+            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="IELTS Speaking Confidence" class="w-full product-image">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">IELTS Speaking Confidence</h3>
+              <p class="text-gray-600 mb-4">Build confidence and fluency for the speaking test.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-gray-900">$29.99</span>
+                <a href="product-detail.html?id=speaking-confidence" class="btn-primary px-4 py-2 rounded-md text-sm font-medium">View Details</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Course 6 -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm writing-courses">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="IELTS Writing Task 2 Mastery" class="w-full product-image">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">IELTS Writing Task 2 Mastery</h3>
+              <p class="text-gray-600 mb-4">Specialized course focusing on essay writing techniques.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-gray-900">$44.99</span>
+                <a href="product-detail.html?id=task2-mastery" class="btn-primary px-4 py-2 rounded-md text-sm font-medium">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Templates Section -->
+  <div id="templates-section" class="product-section">
+    <!-- Category Tabs for Templates -->
+    <div class="bg-white py-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap justify-center gap-2">
+          <button class="category-tab active px-4 py-2 rounded-full text-sm font-medium" data-category="all-templates">
+            All Templates
+          </button>
+          <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="study-plan-templates">
+            Study Plans
+          </button>
+          <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="vocabulary-templates">
+            Listening
+          </button>
+          <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="vocabulary-templates">
+            Reading
+          </button>
+          <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="writing-templates">
+            Writing
+          </button>
+          <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="reading-templates">
+            Speaking
+          </button>
+          <button class="category-tab px-4 py-2 rounded-full text-sm font-medium" data-category="exam-templates">
+            Vocabulary
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Templates -->
+    <div class="bg-gray-50 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-extrabold text-gray-900">Featured Templates</h2>
+          <p class="mt-4 text-lg text-gray-500">Our most popular Notion templates for IELTS preparation</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Template 1 -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm study-plan-templates">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="IELTS Study Plan Template" class="w-full product-image">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">IELTS Study Plan Template</h3>
+              <p class="text-gray-600 mb-4">Organize your IELTS preparation with this comprehensive study plan template.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-gray-900">$19.99</span>
+                <a href="product-detail.html?id=study-plan-template" class="btn-primary px-4 py-2 rounded-md text-sm font-medium">View Details</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Template 2 -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm vocabulary-templates">
+            <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="IELTS Vocabulary Tracker" class="w-full product-image">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">IELTS Vocabulary Tracker</h3>
+              <p class="text-gray-600 mb-4">Track and organize your vocabulary learning with this Notion template.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-gray-900">$14.99</span>
+                <a href="product-detail.html?id=vocabulary-tracker" class="btn-primary px-4 py-2 rounded-md text-sm font-medium">View Details</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Template 3 -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm writing-templates">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="IELTS Writing Templates Pack" class="w-full product-image">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">IELTS Writing Templates Pack</h3>
+              <p class="text-gray-600 mb-4">Collection of templates for Task 1 and Task 2 with example structures.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-gray-900">$24.99</span>
+                <a href="product-detail.html?id=writing-templates" class="btn-primary px-4 py-2 rounded-md text-sm font-medium">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- All Templates -->
+    <div class="bg-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-extrabold text-gray-900">All Templates</h2>
+          <p class="mt-4 text-lg text-gray-500">Browse our complete collection of Notion templates</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Template 4 -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm reading-templates">
+            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="IELTS Reading Notes Template" class="w-full product-image">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">IELTS Reading Notes Template</h3>
+              <p class="text-gray-600 mb-4">Organize your reading practice and track your progress.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-gray-900">$16.99</span>
+                <a href="product-detail.html?id=reading-notes" class="btn-primary px-4 py-2 rounded-md text-sm font-medium">View Details</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Template 5 -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm exam-templates">
+            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="IELTS Exam Day Checklist" class="w-full product-image">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">IELTS Exam Day Checklist</h3>
+              <p class="text-gray-600 mb-4">Prepare for exam day with this comprehensive checklist template.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-gray-900">$9.99</span>
+                <a href="product-detail.html?id=exam-checklist" class="btn-primary px-4 py-2 rounded-md text-sm font-medium">View Details</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Template 6 -->
+          <div class="card bg-white rounded-lg overflow-hidden shadow-sm study-plan-templates">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="IELTS Progress Tracker" class="w-full product-image">
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">IELTS Progress Tracker</h3>
+              <p class="text-gray-600 mb-4">Track your IELTS preparation progress with this comprehensive template.</p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-gray-900">$19.99</span>
+                <a href="product-detail.html?id=progress-tracker" class="btn-primary px-4 py-2 rounded-md text-sm font-medium">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900">What Our Students Say</h2>
+        <p class="mt-4 text-lg text-gray-500">Hear from students who have used our courses and templates</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="bg-white p-6 rounded-lg shadow-sm testimonial-card">
+          <div class="flex items-center mb-4">
+            <div class="flex-shrink-0">
+              <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Sarah">
+            </div>
+            <div class="ml-4">
+              <h4 class="text-lg font-medium text-gray-900">Sarah</h4>
+              <p class="text-gray-500">Band 7.5</p>
+            </div>
+          </div>
+          <p class="text-gray-600">"The Writing Mastery Course helped me improve my score from 6.0 to 7.0. The templates and strategies were exactly what I needed!"</p>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="bg-white p-6 rounded-lg shadow-sm testimonial-card">
+          <div class="flex items-center mb-4">
+            <div class="flex-shrink-0">
+              <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Michael">
+            </div>
+            <div class="ml-4">
+              <h4 class="text-lg font-medium text-gray-900">Michael</h4>
+              <p class="text-gray-500">Band 8.0</p>
+            </div>
+          </div>
+          <p class="text-gray-600">"The Notion templates made organizing my study plan so much easier. I was able to track my progress and focus on my weak areas."</p>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="bg-white p-6 rounded-lg shadow-sm testimonial-card">
+          <div class="flex items-center mb-4">
+            <div class="flex-shrink-0">
+              <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="David">
+            </div>
+            <div class="ml-4">
+              <h4 class="text-lg font-medium text-gray-900">David</h4>
+              <p class="text-gray-500">Band 7.0</p>
+            </div>
+          </div>
+          <p class="text-gray-600">"The Complete Preparation course was worth every penny. It covered everything I needed to know for the exam."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-gray-900">Frequently Asked Questions</h2>
+        <p class="mt-4 text-lg text-gray-500">Find answers to common questions about our courses and templates</p>
+      </div>
+      <div class="max-w-3xl mx-auto">
+        <div class="space-y-6">
+          <!-- FAQ Item 1 -->
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-2">How do I access my purchased course or template?</h3>
+            <p class="text-gray-600">After purchase, you'll receive an email with download instructions. For courses, you'll get access to our learning platform. For templates, you'll receive a Notion template link.</p>
+          </div>
+          
+          <!-- FAQ Item 2 -->
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-2">Do you offer refunds?</h3>
+            <p class="text-gray-600">Yes, we offer a 30-day money-back guarantee if you're not satisfied with your purchase.</p>
+          </div>
+          
+          <!-- FAQ Item 3 -->
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-2">Are the templates compatible with my Notion account?</h3>
+            <p class="text-gray-600">Yes, all our templates are compatible with any Notion account. You'll receive a link to duplicate the template to your own workspace.</p>
+          </div>
+          
+          <!-- FAQ Item 4 -->
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-2">How long do I have access to the courses?</h3>
+            <p class="text-gray-600">You have lifetime access to all purchased courses. You can watch the videos and download materials at your own pace.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-lg font-semibold mb-4">IELTS Learning</h3>
+          <p class="text-gray-400">Helping students achieve their IELTS goals with proven strategies and resources.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+            <li><a href="about.html" class="text-gray-400 hover:text-white">About</a></li>
+            <li><a href="resources.html" class="text-gray-400 hover:text-white">Free Resources</a></li>
+            <li><a href="templates.html" class="text-gray-400 hover:text-white">Templates & Courses</a></li>
+            <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+          <p class="text-gray-400">Email: info@ieltslearning.com</p>
+          <p class="text-gray-400">Phone: +1 (555) 123-4567</p>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2023 IELTS Learning. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Product type navigation
+    document.addEventListener('DOMContentLoaded', function() {
+      const coursesTab = document.getElementById('courses-tab');
+      const templatesTab = document.getElementById('templates-tab');
+      const coursesSection = document.getElementById('courses-section');
+      const templatesSection = document.getElementById('templates-section');
+      
+      coursesTab.addEventListener('click', function() {
+        coursesTab.classList.add('active');
+        templatesTab.classList.remove('active');
+        coursesSection.classList.add('active');
+        templatesSection.classList.remove('active');
+      });
+      
+      templatesTab.addEventListener('click', function() {
+        templatesTab.classList.add('active');
+        coursesTab.classList.remove('active');
+        templatesSection.classList.add('active');
+        coursesSection.classList.remove('active');
+      });
+      
+      // Category filtering for courses
+      const courseCategoryTabs = document.querySelectorAll('#courses-section .category-tab');
+      const courseCards = document.querySelectorAll('#courses-section .card');
+      
+      courseCategoryTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          // Remove active class from all tabs
+          courseCategoryTabs.forEach(t => t.classList.remove('active'));
+          // Add active class to clicked tab
+          this.classList.add('active');
+          
+          const category = this.getAttribute('data-category');
+          
+          courseCards.forEach(card => {
+            if (category === 'all-courses') {
+              card.style.display = 'block';
+            } else if (card.classList.contains(category)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+      
+      // Category filtering for templates
+      const templateCategoryTabs = document.querySelectorAll('#templates-section .category-tab');
+      const templateCards = document.querySelectorAll('#templates-section .card');
+      
+      templateCategoryTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          // Remove active class from all tabs
+          templateCategoryTabs.forEach(t => t.classList.remove('active'));
+          // Add active class to clicked tab
+          this.classList.add('active');
+          
+          const category = this.getAttribute('data-category');
+          
+          templateCards.forEach(card => {
+            if (category === 'all-templates') {
+              card.style.display = 'block';
+            } else if (card.classList.contains(category)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html> 

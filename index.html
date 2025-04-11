@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOY IELTS</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+      .carousel {
+        display: flex;
+        overflow: hidden;
+        position: relative;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease;
+      }
+      .carousel-card {
+        min-width: 16rem;
+        margin: 0 0.75rem;
+        flex-shrink: 0;
+      }
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 9999px;
+        padding: 0.5rem 0.75rem;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 10;
+        transition: background 0.3s;
+      }
+      .carousel-btn:hover {
+        background: rgba(255, 255, 255, 0.9);
+      }
+      .carousel-btn.left {
+        left: -2rem;
+      }
+      .carousel-btn.right {
+        right: -2rem;
+      }
+
+      @media (max-width: 768px) {
+        .carousel-card {
+          min-width: 80%;
+        }
+        .carousel-btn.left {
+          left: 0.5rem;
+        }
+        .carousel-btn.right {
+          right: 0.5rem;
+        }
+      }
+    </style>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center p-6 shadow-md sticky top-0 bg-white z-50">
+      <h1 class="text-2xl font-bold">JOY IELTS</h1>
+      <ul class="hidden md:flex space-x-6 text-sm font-medium">
+        <li><a href="index.html" class="text-yellow-500">Home</a></li>
+        <li><a href="about.html" class="hover:text-yellow-500">About</a></li>
+        <li><a href="resources.html" class="hover:text-yellow-500">Free Resources</a></li>
+        <li><a href="#templates" class="hover:text-yellow-500">Templates & Courses</a></li>
+        <li><a href="#youtube" class="hover:text-yellow-500">YouTube</a></li>
+        <li><a href="#faq" class="hover:text-yellow-500">FAQ / Assistant</a></li>
+        <li><a href="#contact" class="hover:text-yellow-500">Contact</a></li>
+      </ul>
+    </nav>
+
+<!-- Home Section -->
+<section id="home" class="px-6 py-16 text-center">
+  <p class="text-lg text-gray-600 mb-8"></p>
+
+  <section class="bg-[#fef8f4] py-20 px-6">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+        
+        <!-- Left: Illustration -->
+        <div class="md:w-1/2 w-full flex justify-center">
+          <img
+            src="./images/hero-illustration.png"
+            alt="IELTS teacher illustration"
+            class="w-[300px] md:w-[400px] object-contain"
+          />
+        </div>
+
+        <!-- Right: Text content -->
+        <div class="md:w-1/2 w-full text-center md:text-left">
+          <h1 class="text-6xl md:text-9xl font-black tracking-tight leading-tight text-[#1a1a1a] font-serif mb-6">
+            MASTER<br />IELTS<br /><span class="inline-block bg-[#FFD368] px-2 -rotate-2">with JOY</span>
+          </h1>
+          
+          <p class="text-gray-600 text-lg mb-6 font-sans">
+            Helping non-native speakers achieve Band 8+ with smart, practical learning tools.
+          </p>
+
+          <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+            <!-- Learn More button → 黑底白字 -->
+            <a
+              href="/about"
+              class="inline-block text-white px-6 py-3 rounded-full font-medium shadow hover:scale-105 transition"
+              style="background-color: #39353f;"
+            >
+              Learn More
+            </a>
+          
+            <!-- Free Resources button → 黄底黑字 -->
+            <a
+              href="/resources"
+              class="inline-block text-[#39353f] px-6 py-3 rounded-full font-medium shadow hover:brightness-105 transition"
+              style="background-color: #ffd368;"
+            >
+              Free Resources
+            </a>
+          </div>
+        </div>
+      </div>
+  </section>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="px-6 py-16 bg-gray-100">
+    <h2 class="text-3xl font-semibold text-center mb-6">Follow Me</h2>
+    <div class="flex justify-center mt-8 space-x-6 text-xl">
+      
+      <!-- YouTube 图标 -->
+      <a href="https://www.youtube.com/@JOYIELTS" target="_blank" class="flex items-center space-x-2 hover:text-red-500">
+        <img src="./images/youtube.jpg" alt="Xiaohongshu" class="w-6 h-6 rounded" />
+        <i class="fab fa-youtube text-2xl"></i>
+        <span>YouTube</span>
+      </a>
+      
+      <!-- Xiaohongshu 图标 -->
+      <a href="https://www.xiaohongshu.com/discovery/item/65b4235c000000002c010436?source=webshare" target="_blank" class="flex items-center space-x-2 hover:text-pink-500">
+        <img src="./images/xiaohongshu.png" alt="Xiaohongshu" class="w-6 h-6 rounded" />
+        <span>Redbook</span>
+      </a>
+  
+      <!-- Bilibili 图标 -->
+      <a href="https://space.bilibili.com/13442337" target="_blank" class="flex items-center space-x-2 hover:text-blue-500">
+        <img src="./images/bilibili.png" alt="Bilibili" class="w-6 h-6 rounded" />
+        <span>Bilibili</span>
+      </a>
+    </div>
+  </section>
+  
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Social Media Section -->
+            <div class="text-center mb-12">
+                <h3 class="text-2xl font-bold mb-6">More Infomations</h3>
+                <p class="text-gray-400 mb-8">Stay updated with our latest IELTS tips and resources!</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">JOY IELTS</h3>
+                    <p class="text-gray-400">Empowering IELTS learners with comprehensive resources and expert guidance.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-yellow-500">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-yellow-500">About</a></li>
+                        <li><a href="resources.html" class="text-gray-400 hover:text-yellow-500">Free Resources</a></li>
+                        <li><a href="templates.html" class="text-gray-400 hover:text-yellow-500">Templates & Courses</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-yellow-500">FAQ / Assistant</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-yellow-500">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="resources.html#writing" class="text-gray-400 hover:text-yellow-500">Writing</a></li>
+                        <li><a href="resources.html#reading" class="text-gray-400 hover:text-yellow-500">Reading</a></li>
+                        <li><a href="resources.html#listening" class="text-gray-400 hover:text-yellow-500">Listening</a></li>
+                        <li><a href="resources.html#speaking" class="text-gray-400 hover:text-yellow-500">Speaking</a></li>
+                        <li><a href="resources.html#vocabulary" class="text-gray-400 hover:text-yellow-500">Vocabulary</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-yellow-500 mr-2"></i>
+                            <a href="mailto:joyzhu1020@gmail.com" class="text-gray-400 hover:text-yellow-500">joyzhu1020@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 JOY IELTS. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

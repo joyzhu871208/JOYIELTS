@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resource Detail - JOY IELTS</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+      /* Base styles */
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        color: #37352f;
+      }
+      
+      /* Card styles to match home page */
+      .card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      /* Button style to match home page */
+      .btn-primary {
+        display: inline-block;
+        background-color: #ffd368; /* 哑光质感的黄色 */
+        color: #333; /* 深色文字，提高可读性 */
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      
+      .btn-primary:hover {
+        background-color: #e6be5e; /* 更深的黄色 */
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+      
+      /* Resource preview */
+      .resource-preview {
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        background-color: #f9fafb;
+      }
+      
+      /* Email collection form */
+      .email-form {
+        background-color: #f3f4f6;
+        border-radius: 0.75rem;
+        padding: 2rem;
+      }
+      
+      .email-input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center p-6 shadow-md sticky top-0 bg-white z-50">
+      <h1 class="text-2xl font-bold">JOY IELTS</h1>
+      <ul class="hidden md:flex space-x-6 text-sm font-medium">
+        <li><a href="index.html" class="hover:text-yellow-500">Home</a></li>
+        <li><a href="about.html" class="hover:text-yellow-500">About</a></li>
+        <li><a href="resources.html" class="text-yellow-500">Free Resources</a></li>
+        <li><a href="#templates" class="hover:text-yellow-500">Templates & Courses</a></li>
+        <li><a href="#youtube" class="hover:text-yellow-500">YouTube</a></li>
+        <li><a href="#faq" class="hover:text-yellow-500">FAQ / Assistant</a></li>
+        <li><a href="#contact" class="hover:text-yellow-500">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Resource Detail Content -->
+    <div class="max-w-4xl mx-auto px-4 py-12">
+      <!-- Back to Resources Link -->
+      <a href="resources.html" class="inline-flex items-center text-yellow-500 mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>
+        Back to Resources
+      </a>
+      
+      <!-- Resource Header -->
+      <div class="card mb-8">
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+          <div class="text-4xl md:text-5xl">📝</div>
+          <div>
+            <h1 class="text-3xl font-bold mb-2" id="resource-title">IELTS Writing Task One</h1>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Task 1</span>
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Level: 7-8</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Resource Content -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Main Content -->
+        <div class="md:col-span-2">
+          <div class="card mb-8">
+            <h2 class="text-xl font-semibold mb-4">Introduction</h2>
+            <p class="mb-4">
+              This IELTS Writing Task 1 sample essay is designed to help you structure your essays effectively. 
+              It provides a clear framework that you can adapt to this type of question, ensuring you cover all the key elements 
+              that examiners look for.
+            </p>
+          </div>
+          
+          <!-- Video Tutorial -->
+          <div class="card mb-8">
+            <h2 class="text-xl font-semibold mb-4">Video Tutorial</h2>
+            <p class="mb-4">Watch this video to learn how to write effectively:</p>
+            <div class="aspect-video w-full rounded-xl overflow-hidden">
+              <iframe
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/example-video-id"
+                title="How to Use the IELTS Writing Task 2 Template"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+          
+          <!-- Usage Guide -->
+          <div class="card">
+            <h2 class="text-xl font-semibold mb-4">How to Use This Template</h2>
+            <ol class="list-decimal pl-5 space-y-4">
+              <li>
+                <p class="font-medium">Familiarize yourself with the template structure</p>
+              </li>
+              <li>
+                <p class="font-medium">Practice with different question types</p
+              </li>
+              <li>
+                <p class="font-medium">Personalize the template</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div>
+          <!-- Download Options -->
+          <div class="card mb-8">
+            <h2 class="text-xl font-semibold mb-4">Download Options</h2>
+            
+            <!-- Basic Download -->
+            <div class="mb-6">
+              <h3 class="font-medium mb-2">Notes Version</h3>
+              <p class="text-sm text-gray-600 mb-4">Get the sample essay in PDF format</p>
+              <a id="download-link" href="resources/line_graph_sample.pdf" class="btn-primary w-full text-center">Download PDF</a>
+            </div>
+            
+            <!-- Premium Download -->
+            <div>
+              <h3 class="font-medium mb-2">Premium Version</h3>
+              <p class="text-sm text-gray-600 mb-4">Get the sample essay with examples and detailed explanations</p>
+              <a href="#email-form" class="btn-primary w-full text-center">Detailed Version</a>
+            </div>
+          </div>
+          
+          <!-- Related Resources -->
+          <div class="card mt-8">
+            <h2 class="text-xl font-semibold mb-4">Related Resources</h2>
+            <ul class="space-y-3">
+              <li>
+                <a href="resource-detail.html?id=task1-guide" class="text-yellow-500 hover:underline">Task 1 Academic Charts Guide</a>
+              </li>
+              <li>
+                <a href="resource-detail.html?id=writing-mistakes" class="text-yellow-500 hover:underline">Common Writing Mistakes PDF</a>
+              </li>
+              <li>
+                <a href="resource-detail.html?id=academic-words" class="text-yellow-500 hover:underline">Academic Word List</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 text-sm text-gray-400">
+      © 2024 JOY IELTS. All rights reserved.
+    </footer>
+
+<!-- 引入 resources.js 文件 -->
+<script src="resources.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    if (id && resources[id]) {
+      const r = resources[id];
+
+      // 更新页面标题
+      document.getElementById("resource-title").textContent = r.title;
+
+      // 为下载按钮设置正确的href
+      const downloadLink = document.getElementById("download-link");
+      downloadLink.href = r.download;
+      
+      // 添加download属性以确保浏览器将其视为下载而不是导航
+      downloadLink.setAttribute("download", "");
+      
+      // 不需要阻止默认行为，让浏览器正常处理下载
+      // downloadLink.addEventListener("click", function (e) {
+      //   e.preventDefault(); // 阻止默认行为
+      //   window.location.href = r.download; 
+      // });
+    }
+  });
+</script>
+
+  </body>
+</html> 
