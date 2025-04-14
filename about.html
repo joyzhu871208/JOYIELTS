@@ -110,11 +110,28 @@
         <li><a href="index.html" class="hover:text-yellow-500">Home</a></li>
         <li><a href="about.html" class="text-yellow-500">About</a></li>
         <li><a href="resources.html" class="hover:text-yellow-500">Free Resources</a></li>
-        <li><a href="#templates" class="hover:text-yellow-500">Templates & Courses</a></li>
-        <li><a href="#youtube" class="hover:text-yellow-500">YouTube</a></li>
-        <li><a href="#faq" class="hover:text-yellow-500">FAQ / Assistant</a></li>
-        <li><a href="#contact" class="hover:text-yellow-500">Contact</a></li>
+        <li><a href="templates.html" class="hover:text-yellow-500">Templates & Courses</a></li>
+        <li><a href="contact.html" class="hover:text-yellow-500">Contact</a></li>
       </ul>
+      <div class="md:hidden">
+        <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-500" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      </nav>
+      
+      <div class="sm:hidden" id="mobile-menu">
+        <div class="pt-2 pb-3 space-y-1">
+          <a href="index.html" class="bg-yellow-50 border-yellow-500 text-yellow-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
+          <a href="about.html" class="bg-transparent border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About</a>
+          <a href="resources.html" class="bg-transparent border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Free Resources</a>
+          <a href="templates.html" class="bg-transparent border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Templates & Courses</a>
+          <a href="contact.html" class="bg-transparent border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact</a>
+        </div>
+      </div>
     </nav>
 
     <!-- About Section -->
@@ -237,29 +254,42 @@
   </div>
 </div>
 
-      <!-- Video Embed -->
-      <div class="notion-block text-center">
-        <h2 class="text-2xl font-semibold mb-4">Free Youtube Courses</h2>
-        <div class="card">
-          <div class="aspect-video w-full rounded-xl overflow-hidden">
-            <iframe
-              class="w-full h-full"
-              src="https://www.youtube.com/watch?v=EipEvH8Ch0I&lc=Ugxy09zrk8UMaynNNFN4AaABAg"
-              title="Joy IELTS Teaching Video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+        <!-- Video Embed -->
+        <div class="notion-block text-center">
+          <h2 class="text-4xl font-semibold mb-4">Joy's Youtube Courses</h2>
+          <div class="card" style="width: 75%; aspect-ratio: 16/11; margin: 0 auto; padding: 1rem; background-color: white; border: 1px solid #eaeaea; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; flex-direction: column;">
+            <div class="w-full rounded-xl overflow-hidden" style="flex-grow: 1;">
+              <iframe
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/EipEvH8Ch0I"
+                title="Joy IELTS Teaching Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <p class="text-gray-600" style="margin-top: 0.75rem; max-width: 90%; margin-left: auto; margin-right: auto;">
+              Learn how to upgrade your IELTS Writing with simple steps.
+            </p>
           </div>
-          <p class="text-gray-600 mt-4">
-            Learn how to upgrade your IELTS Writing with simple steps.
-          </p>
         </div>
-      </div>
 
     <!-- Footer -->
     <footer class="text-center py-6 text-sm text-gray-400">
-      © 2024 JOY IELTS. All rights reserved.
+      © 2025 JOY IELTS. All rights reserved.
     </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuButton && mobileMenu) {
+          mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+          });
+        }
+      });
+    </script>
   </body>
 </html> 

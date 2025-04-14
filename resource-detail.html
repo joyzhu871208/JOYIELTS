@@ -78,10 +78,8 @@
         <li><a href="index.html" class="hover:text-yellow-500">Home</a></li>
         <li><a href="about.html" class="hover:text-yellow-500">About</a></li>
         <li><a href="resources.html" class="text-yellow-500">Free Resources</a></li>
-        <li><a href="#templates" class="hover:text-yellow-500">Templates & Courses</a></li>
-        <li><a href="#youtube" class="hover:text-yellow-500">YouTube</a></li>
-        <li><a href="#faq" class="hover:text-yellow-500">FAQ / Assistant</a></li>
-        <li><a href="#contact" class="hover:text-yellow-500">Contact</a></li>
+        <li><a href="templates.html" class="hover:text-yellow-500">Templates & Courses</a></li>
+        <li><a href="contact.html" class="hover:text-yellow-500">Contact</a></li>
       </ul>
     </nav>
 
@@ -172,7 +170,7 @@
             <div>
               <h3 class="font-medium mb-2">Premium Version</h3>
               <p class="text-sm text-gray-600 mb-4">Get the sample essay with examples and detailed explanations</p>
-              <a href="#email-form" class="btn-primary w-full text-center">Detailed Version</a>
+              <a href="#email-form" class="btn-primary w-full text-center">Coming Soon</a>
             </div>
           </div>
           
@@ -181,13 +179,13 @@
             <h2 class="text-xl font-semibold mb-4">Related Resources</h2>
             <ul class="space-y-3">
               <li>
-                <a href="resource-detail.html?id=task1-guide" class="text-yellow-500 hover:underline">Task 1 Academic Charts Guide</a>
+                <a href="resource-detail.html?id=line-graph" class="text-yellow-500 hover:underline">Task 1 Academic Charts Guide</a>
               </li>
               <li>
-                <a href="resource-detail.html?id=writing-mistakes" class="text-yellow-500 hover:underline">Common Writing Mistakes PDF</a>
+                <a href="resource-detail.html?id=map-sample" class="text-yellow-500 hover:underline">Common Writing Mistakes PDF</a>
               </li>
               <li>
-                <a href="resource-detail.html?id=academic-words" class="text-yellow-500 hover:underline">Academic Word List</a>
+                <a href="resource-detail.html?id=sugar-process" class="text-yellow-500 hover:underline">Academic Word List</a>
               </li>
             </ul>
           </div>
@@ -216,15 +214,15 @@
       // 为下载按钮设置正确的href
       const downloadLink = document.getElementById("download-link");
       downloadLink.href = r.download;
-      
+    
       // 添加download属性以确保浏览器将其视为下载而不是导航
       downloadLink.setAttribute("download", "");
-      
-      // 不需要阻止默认行为，让浏览器正常处理下载
-      // downloadLink.addEventListener("click", function (e) {
-      //   e.preventDefault(); // 阻止默认行为
-      //   window.location.href = r.download; 
-      // });
+    
+      // 更新视频iframe的src属性
+      const videoIframe = document.querySelector('.aspect-video iframe');
+      if (videoIframe && r.video) {
+        videoIframe.src = r.video;
+     }
     }
   });
 </script>
